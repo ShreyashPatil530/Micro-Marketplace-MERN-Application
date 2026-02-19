@@ -24,7 +24,33 @@ A complete, production-ready Micro Marketplace built using the MERN stack with J
 - **Database**: MongoDB (Atlas).
 - **Auth**: JWT (JSON Web Tokens), Bcrypt.js.
 
-## 📦 Project Structure
+## � Workflow Diagram
+
+```mermaid
+graph TD
+    User((User)) -->|Interacts| UI[Frontend - React/Tailwind]
+    UI -->|API Request| Auth{JWT Auth Middleware}
+    
+    subgraph "Backend (Node.js/Express)"
+        Auth -->|Authorized| Controller[Product/User Controllers]
+        Controller -->|Query| DB[(MongoDB Atlas)]
+        
+        Admin[Admin User] -->|Seed Command| Seeder[Seed Script]
+        Seeder -->|Populate| DB
+    end
+    
+    subgraph "Frontend Logic"
+        UI -->|Context API| State[Auth & Favorites State]
+        UI -->|Framer Motion| Anim[Smooth UI Transitions]
+    end
+    
+    DB -->|Return Data| Controller
+    Controller -->|JSON Response| UI
+    UI -->|Display| User
+```
+
+
+## �📦 Project Structure
 
 ```text
 ├── backend/
